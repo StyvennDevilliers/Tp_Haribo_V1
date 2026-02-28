@@ -4,7 +4,7 @@ document.onreadystatechange = function () {
     console.log(document.readyState)
     if(document.readyState == 'interactive') {
         console.log("c'est ok")
-        //TODO add tagada, ajouter le path des images dans les objets et essayer de faire une boucle pour les infos de la commande
+        //TODO: add tagada, ajouter le path des images dans les objets, essayer de faire une boucle pour les infos de la commande et pour les numbers il faut passer par la classe pas l'id.
 
         let prix_Chamallows = 2.28;
         let prix_Dragibus = 1.64;
@@ -24,8 +24,8 @@ document.onreadystatechange = function () {
         let moins_2 = document.getElementById("moins_2");
 
         const state = {
-            chamallows: {name:"Chamallows", prix: prix_Chamallows,  qty: parseInt(input_1.value), poids: poid_init_c, img: "images/chamallows.jpg" },
-            dragibus:   {name:"Dragibus", prix: prix_Dragibus,  qty: parseInt(input_2.value), poids: poid_init_d, img: "images/dragibus.jpg" }
+            chamallows: {name:"Chamallows", prix: prix_c,  qty: parseInt(input_1.value), poids: poid_init_c },
+            dragibus:   {name:"Dragibus", prix: prix_d,  qty: parseInt(input_2.value), poids: poid_init_d }
         };
 
         Object.values(state).forEach(object => {
@@ -37,6 +37,18 @@ document.onreadystatechange = function () {
 
         refreshDragibus()
         refreshChamallows()
+
+        for (let i = 0; i < document.getElementsByClassName("number").length; i++) {
+            document.getElementsByClassName("number")[i].onchange = function () {
+                Object.values(state)[i].qty=Number(document.getElementsByClassName("number")[i].value);
+                if(Object.values(state)[i].qty < 0) {
+                    document.getElementsByClassName("number")[i].value = 0;
+                    Object.values(state)[i].qty=0;
+                }
+                Object.values(state)[i].qty = document.getElementsByClassName("number")[i].value;
+                updateCommande();
+            }
+        }
 
         plus_1.onclick = function () {
             //q1++;
@@ -82,7 +94,7 @@ document.onreadystatechange = function () {
             }
             updateCommande();
         }
-        input_1.onchange = function () {
+        /*input_1.onchange = function () {
             //q1 = Number(input_1.value);
             state.chamallows.qty=Number(input_1.value);
             if(state.chamallows.qty < 0) {
@@ -103,7 +115,7 @@ document.onreadystatechange = function () {
             }
             state.dragibus.qty = input_2.value;
             updateCommande();
-        }
+        }*/
 
         function refreshDragibus(){
             document.getElementById("nbr_d").innerText = state.dragibus.qty + " paquets de Dragibus"
