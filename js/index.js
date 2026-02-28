@@ -4,7 +4,7 @@ document.onreadystatechange = function () {
     console.log(document.readyState)
     if(document.readyState == 'interactive') {
         console.log("c'est ok")
-        //TODO: add tagada, ajouter le path des images dans les objets et essayer de faire une boucle pour les infos de la commande 
+        //TODO: add tagada, ajouter le path des images dans les objets, essayer de faire une boucle pour les infos de la commande et pour les numbers il faut passer par la classe pas l'id.
 
         let prix_c = 2.28;
         let prix_d = 1.64;
