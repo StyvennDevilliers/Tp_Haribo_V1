@@ -1,4 +1,8 @@
 console.log("test js")
+let prix_c = 2.28;
+let prix_d = 1.64;
+let poid_init_c = 100;
+let poid_init_d = 300;
 
 document.onreadystatechange = function () {
     console.log(document.readyState)
@@ -6,10 +10,6 @@ document.onreadystatechange = function () {
         console.log("c'est ok")
         //TODO: add tagada, ajouter le path des images dans les objets et essayer de faire une boucle pour les infos de la commande 
 
-        let prix_c = 2.28;
-        let prix_d = 1.64;
-        let poid_init_c = 100;
-        let poid_init_d = 300;
         let commande  = document.getElementById("commande-list");
         let prix_total = document.getElementById("prix_total");
         let poids_total = document.getElementById("poids_total");
@@ -36,6 +36,18 @@ document.onreadystatechange = function () {
         document.getElementById("name_2").innerText = state.dragibus.name;
         refreshDragibus()
         refreshChamallows()
+
+        for (let i = 0; i < document.getElementsByClassName("number").length; i++) {
+            document.getElementsByClassName("number")[i].onchange = function () {
+                Object.values(state)[i].qty=Number(document.getElementsByClassName("number")[i].value);
+                if(Object.values(state)[i].qty < 0) {
+                    document.getElementsByClassName("number")[i].value = 0;
+                    Object.values(state)[i].qty=0;
+                }
+                Object.values(state)[i].qty = document.getElementsByClassName("number")[i].value;
+                updateCommande();
+            }
+        }
 
         plus_1.onclick = function () {
             //q1++;
@@ -81,7 +93,7 @@ document.onreadystatechange = function () {
             }
             updateCommande();
         }
-        input_1.onchange = function () {
+        /*input_1.onchange = function () {
             //q1 = Number(input_1.value);
             state.chamallows.qty=Number(input_1.value);
             if(state.chamallows.qty < 0) {
@@ -102,7 +114,7 @@ document.onreadystatechange = function () {
             }
             state.dragibus.qty = input_2.value;
             updateCommande();
-        }
+        }*/
 
         function refreshDragibus(){
             document.getElementById("nbr_d").innerText = state.dragibus.qty + " paquets de Dragibus"
