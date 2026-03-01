@@ -1,17 +1,5 @@
-
-#plus_1,#plus_2{
-    background-color: #0084de;
-    border: none;
-    cursor: pointer;
-}
-
-#number_1,#number_2 {
-    text-align: center;
-    background: white;
-}
-
-#moins_1, #moins_2{
-    background-color: #0084de;
+.btn-medium{
+    backface-visibility: hidden;
     border: none;
     cursor: pointer;
 }
