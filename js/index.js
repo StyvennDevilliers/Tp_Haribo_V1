@@ -67,14 +67,15 @@ document.onreadystatechange = function () {
                 document.getElementById("nbr_" + object.name).innerText = object.qty + " paquets de Dragibus"
                 document.getElementById("prix_tot_" + object.name).innerText ="Prix total = " + (object.prix * object.qty).toFixed(2) + " €";
                 let poid = object.poids*object.qty;
+                let unite ;
                 if(poid>=1000) {
-                    unité = "kg";
+                    unite = "kg";
                     poid = poid/1000;
                 }
                 else{
-                    unité = "g";
+                    unite = "g";
                 }
-                document.getElementById("poids_tot_" + object.name).innerText ="Poids total = " + poid + unité;
+                document.getElementById("poids_tot_" + object.name).innerText ="Poids total = " + poid + unite;
                 document.getElementById("prix_kilo_" + object.name).innerText ="Prix au kilo = " +((object.prix*1000)/ object.poids).toFixed(2) + " €";
             })
         }
@@ -113,15 +114,15 @@ document.onreadystatechange = function () {
                     commande.appendChild(li_prix);
                     let li_poids = document.createElement("li");
                     let poid =product.poids*product.qty;
-                    let unité;
+                    let unite;
                     if(poid>=1000) {
-                        unité = "kg";
+                        unite = "kg";
                         poid = poid/1000;
                     }
                     else{
-                        unité = "g";
+                        unite = "g";
                     }
-                    li_poids.textContent = "Poids total = " + poid + unité;
+                    li_poids.textContent = "Poids total = " + poid + unite;
                     li_poids.style.marginBottom = "20px";
                     commande.appendChild(li_poids);
                     somme += product.qty * product.prix;
@@ -133,18 +134,19 @@ document.onreadystatechange = function () {
             Object.values(state).forEach(product => {
                 poids_tot += product.poids*product.qty;
             })
+            let unite;
             if(poids_tot>=1000) {
-                unité = "kg";
+                unite = "kg";
                 poids_tot = poids_tot/1000;
             }
             else{
-                unité = "g";
+                unite = "g";
             }
             commande.style.marginBottom = "20px";
             commande.append("Récapitulatif de la commande")
             prix_total.innerHTML ="Prix total = " + somme.toFixed(2) + " €";
             prix_total.style.textAlign = "center";
-            poids_total.innerHTML ="Poids total = " + poids_tot + unité;
+            poids_total.innerHTML ="Poids total = " + poids_tot + unite;
             poids_total.style.textAlign = "center";
         }
     }
